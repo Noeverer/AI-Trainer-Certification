@@ -1,2 +1,110 @@
-# AI-Trainer-Certification
-关于人工智能训练师（三级）的考试资料的AI总结
+# 🎯 人工智能训练师三级 - 备考宝典
+
+> 专为 Python 零基础考生设计的备考资料，4 个代码模板 + 通用答题框架，帮助你在 5-7 小时内掌握通关要点！
+
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-在线访问-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-blue)
+
+## 🌐 在线访问
+
+**备考网站**: [https://LivingWithAI.github.io/AI-Trainer-Certification/](https://LivingWithAI.github.io/AI-Trainer-Certification/)
+
+## ✨ 网站功能
+
+| 页面 | 功能 | 特点 |
+|------|------|------|
+| **首页** | 备考概览和学习路径 | 一目了然的备考计划 |
+| **代码速记卡** | 4 个核心代码模板 | 详细注释 + 考点提示 |
+| **必背函数** | 20 个高频函数 | 按题型分类 + 填空答案 |
+| **主观题模板** | 1.2.X / 3.1.X 答题框架 | 关键词 + 得分点 |
+| **FAQ** | 入门篇 + 进阶篇 | 零基础友好 |
+
+## 📁 项目结构
+
+```
+AI-Trainer-Certification/
+├── docs/                      # 📱 GitHub Pages 网站
+│   ├── index.html            # 首页
+│   ├── cheatsheet.html       # 代码速记卡
+│   ├── functions.html        # 必背函数速查
+│   ├── subjective.html       # 主观题模板
+│   ├── faq.html              # 常见问题
+│   └── _config.yml           # GitHub Pages 配置
+├── 代码速记卡.md              # 📝 Markdown 版速记卡
+├── 练习指南.md                # 📚 练习方法
+├── 常见问题FAQ.md             # ❓ FAQ（Markdown版）
+└── 材料/                      # 📂 原始考试资料
+    ├── 编程题/
+    │   ├── 编程题_已填写答案/   # ✅ 参考答案
+    │   └── 编程题_未填写答案/   # 📝 练习用
+    └── 考前总复习-思维导图/    # 📊 复习资料
+```
+
+## 🚀 快速开始
+
+### 在线学习（推荐）
+
+1. 访问 [备考网站](https://your-username.github.io/AI-Trainer-Certification/)
+2. 按照首页的复习计划进行学习
+3. 重点关注「代码速记卡」和「必背函数」
+
+### 本地部署
+
+```bash
+# 克隆仓库
+git clone https://github.com/LivingWithAI/AI-Trainer-Certification.git
+
+# 进入目录
+cd AI-Trainer-Certification
+
+# 用浏览器直接打开
+open docs/index.html
+```
+
+### 启用 GitHub Pages
+
+1. 进入仓库的 Settings → Pages
+2. Source 选择 `Deploy from a branch`
+3. Branch 选择 `main`，目录选择 `/docs`
+4. 保存后等待几分钟即可访问
+
+## 🎓 考试题型速览
+
+| 题型 | 内容 | 形式 | 关键技能 |
+|------|------|------|---------|
+| **1.1.X** | 数据分析统计 | Python | `np.where` `pd.cut` `groupby` |
+| **1.2.X** | 业务分析报告 | 文字 | 问题分析 + 优化方案 |
+| **2.1.X** | 数据清洗预处理 | Python | `dropna` `StandardScaler` `train_test_split` |
+| **2.2.X** | 机器学习建模 | Python | `fit` `predict` `pickle.dump` |
+| **3.1.X** | 系统设计文档 | 文字 | 功能模块 + 技术方案 |
+| **3.2.X** | ONNX模型推理 | Python | `InferenceSession` `expand_dims` `argmax` |
+
+## ⭐ 核心提示
+
+1. ✅ **考试时 import 已经写好**，你只需要填写核心代码
+2. ✅ **背诵 4 个代码模板**即可覆盖所有编程题
+3. ✅ **文字题有通用框架**，直接套用即可得分
+4. ✅ **建议复习时间 5-7 小时**，重点在背诵和默写
+
+## 🎨 网站设计
+
+- 🌙 深色主题，保护眼睛
+- 📱 响应式布局，支持手机访问
+- ⚡ 纯静态 HTML，无需服务器
+- 🎯 高对比度配色，重点突出
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request 来完善这份资料！
+
+- 发现错误？提 Issue
+- 有更好的解答？提 PR
+- 想增加内容？提 Discussion
+
+## 📄 License
+
+MIT License - 免费使用和分享
+
+---
+
+**祝你考试顺利通关！** 💪🎉

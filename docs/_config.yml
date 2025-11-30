@@ -1,0 +1,15 @@
+# GitHub Pages 配置
+title: AI训练师备考宝典
+description: 人工智能训练师三级备考指南 - 专为零基础考生设计
+
+# 主题设置（使用自定义HTML时可忽略）
+# theme: jekyll-theme-minimal
+
+# 构建设置
+markdown: kramdown
+encoding: UTF-8
+
+# 排除不需要的文件
+exclude:
+  - README.md
+  - .gitignore

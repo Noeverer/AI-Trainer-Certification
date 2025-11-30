@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>必背函数速查 - AI训练师备考宝典</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-tertiary: #27272a;
+            --bg-elevated: #1f1f23;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-default: rgba(255, 255, 255, 0.1);
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-tertiary: #71717a;
+            --accent-primary: #f59e0b;
+            --accent-secondary: #fbbf24;
+            --accent-glow: rgba(245, 158, 11, 0.15);
+            --success: #22c55e;
+            --info: #3b82f6;
+            --warning: #eab308;
+            --error: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .nav-logo span { color: var(--accent-primary); }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+        
+        /* Header */
+        .page-header {
+            padding: 120px 0 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .page-header h1 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Filter Tabs */
+        .filter-section {
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 57px;
+            background: var(--bg-primary);
+            z-index: 50;
+        }
+        .filter-tabs {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .filter-tab {
+            padding: 10px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-tab:hover { border-color: var(--border-default); }
+        .filter-tab.active {
+            background: var(--accent-glow);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+        
+        /* Section */
+        .func-section {
+            padding: 48px 0;
+        }
+        .func-section h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .func-section h2 .badge {
+            font-size: 12px;
+            padding: 4px 10px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            font-weight: 500;
+            color: var(--text-tertiary);
+        }
+        .func-section > p {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+        
+        /* Function Cards Grid */
+        .func-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .func-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.2s;
+        }
+        .func-card:hover {
+            border-color: var(--border-default);
+            transform: translateY(-2px);
+        }
+        .func-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .func-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            color: var(--accent-secondary);
+            font-weight: 500;
+        }
+        .func-freq {
+            display: flex;
+            gap: 3px;
+        }
+        .func-freq span {
+            width: 8px;
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 2px;
+        }
+        .func-freq span.active { background: var(--accent-primary); }
+        .func-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .func-answer {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .func-answer-label {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .func-answer code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--success);
+            display: block;
+            white-space: pre-wrap;
+        }
+        .func-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .func-tag {
+            padding: 4px 10px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+        .func-tag.easy { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+        .func-tag.medium { background: rgba(234, 179, 8, 0.15); color: var(--warning); }
+        .func-tag.hard { background: rgba(239, 68, 68, 0.15); color: var(--error); }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .func-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo"><span>AI</span>训练师备考宝典</a>
+            <div class="nav-links">
+                <a href="cheatsheet.html">代码速记</a>
+                <a href="functions.html" class="active">必背函数</a>
+                <a href="subjective.html">主观题</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>必背函数速查 ⚡</h1>
+            <p>根据真题空白处整理，按题目类型和出现频率分类，星级越高越重要</p>
+        </div>
+    </header>
+
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterFuncs('all')">全部函数</button>
+                <button class="filter-tab" onclick="filterFuncs('1.1')">1.1.X 数据分析</button>
+                <button class="filter-tab" onclick="filterFuncs('2.1')">2.1.X 数据清洗</button>
+                <button class="filter-tab" onclick="filterFuncs('2.2')">2.2.X 机器学习</button>
+                <button class="filter-tab" onclick="filterFuncs('3.2')">3.2.X ONNX推理</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- 1.1.X Section -->
+        <section class="func-section" data-category="1.1">
+            <h2>1.1.X 数据分析统计 <span class="badge">5个函数</span></h2>
+            <p>主要涉及数据读取、条件判断、分箱、分组统计</p>
+            <div class="func-grid">
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">pd.read_csv()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">读取CSV文件，返回DataFrame数据框</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>data = pd.read_csv('文件名.csv')</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag easy">简单</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">np.where()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">条件判断，满足条件返回A，否则返回B</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>np.where(条件, '满足', '不满足')</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag medium">中等</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">pd.cut()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">分箱操作，将连续数值切分成区间</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>pd.cut(data['列'], bins=bins, labels=labels, right=False)</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag medium">中等</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">.groupby().apply()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">分组后应用自定义函数计算</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>data.groupby('分组列')['目标列'].apply(lambda x: (x == '值').mean())</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag hard">较难</span>
+                        <span class="func-tag">高频</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">.value_counts()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">统计每个值出现的次数</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>data['列'].value_counts()</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag easy">简单</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2.1.X Section -->
+        <section class="func-section" data-category="2.1">
+            <h2>2.1.X 数据清洗预处理 <span class="badge">5个函数</span></h2>
+            <p>主要涉及缺失值处理、数据标准化、数据划分</p>
+            <div class="func-grid">
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">.dropna()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">删除包含缺失值的行</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>data = data.dropna()</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag easy">简单</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">StandardScaler()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">数据标准化，转换为均值0方差1</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>scaler = StandardScaler()
+data[列] = scaler.fit_transform(data[列])</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag medium">中等</span>
+                        <span class="func-tag">高频</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">train_test_split()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">划分训练集和测试集</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag medium">中等</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">.to_csv()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">保存DataFrame到CSV文件</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>data.to_csv('文件名.csv', index=False)</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag easy">简单</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">pd.read_excel()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">读取Excel文件</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>data = pd.read_excel('文件名.xlsx')</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag easy">简单</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2.2.X Section -->
+        <section class="func-section" data-category="2.2">
+            <h2>2.2.X 机器学习建模 <span class="badge">5个函数</span></h2>
+            <p>主要涉及模型创建、训练、保存、预测、评估</p>
+            <div class="func-grid">
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">model.fit()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">训练模型</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>model.fit(X_train, y_train)</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag easy">简单</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">model.predict()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">使用模型预测</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>y_pred = model.predict(X_test)</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag easy">简单</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">pickle.dump()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">保存模型到文件</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>pickle.dump(model, file)
+# 或
+pickle.dump(model, open('model.pkl', 'wb'))</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag medium">中等</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">LogisticRegression()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">逻辑回归模型（分类任务）</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>model = LogisticRegression(max_iter=1000)</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag medium">中等</span>
+                        <span class="func-tag">分类题</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">RandomForestRegressor()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">随机森林回归模型（回归任务）</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>model = RandomForestRegressor(n_estimators=100, random_state=42)</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag medium">中等</span>
+                        <span class="func-tag">回归题</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3.2.X Section -->
+        <section class="func-section" data-category="3.2">
+            <h2>3.2.X ONNX模型推理 <span class="badge">5个函数</span></h2>
+            <p>主要涉及模型加载、图片处理、推理预测</p>
+            <div class="func-grid">
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">ort.InferenceSession()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">加载ONNX模型</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>session = ort.InferenceSession('model.onnx')
+# 或 onnxruntime.InferenceSession('model.onnx')</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag medium">中等</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">Image.open().convert()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">打开图片并转换模式</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>image = Image.open('img.png').convert('L')  # 灰度
+image = Image.open('img.jpg').convert('RGB')  # 彩色</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag medium">中等</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">np.expand_dims()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">添加数组维度</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>image_array = np.expand_dims(image_array, axis=0)</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag hard">较难</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">session.run()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">执行推理</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>output = session.run(None, {input_name: image_array})</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag medium">中等</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+
+                <div class="func-card">
+                    <div class="func-header">
+                        <span class="func-name">np.argmax()</span>
+                        <div class="func-freq">
+                            <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+                        </div>
+                    </div>
+                    <p class="func-desc">获取最大值的索引</p>
+                    <div class="func-answer">
+                        <div class="func-answer-label">填空答案</div>
+                        <code>predicted = np.argmax(output[0])</code>
+                    </div>
+                    <div class="func-tags">
+                        <span class="func-tag easy">简单</span>
+                        <span class="func-tag">必考</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="padding: 60px 0; border-top: 1px solid var(--border-subtle); text-align: center;">
+        <div class="container">
+            <p style="color: var(--text-tertiary); font-size: 14px;">Made with ❤️ for AI训练师考生</p>
+        </div>
+    </footer>
+
+    <script>
+        function filterFuncs(category) {
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.func-section').forEach(section => {
+                if (category === 'all' || section.dataset.category === category) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

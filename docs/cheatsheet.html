@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码速记卡 - AI训练师备考宝典</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-tertiary: #27272a;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-default: rgba(255, 255, 255, 0.1);
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-tertiary: #71717a;
+            --accent-primary: #f59e0b;
+            --accent-secondary: #fbbf24;
+            --accent-glow: rgba(245, 158, 11, 0.15);
+            --success: #22c55e;
+            --info: #3b82f6;
+            --warning: #eab308;
+            --error: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Nav */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .nav-logo span { color: var(--accent-primary); }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+        
+        /* Header */
+        .page-header {
+            padding: 120px 0 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .page-header h1 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Template Cards */
+        .template-section {
+            padding: 48px 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .template-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .template-number {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-glow);
+            border: 1px solid var(--accent-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+        .template-title h2 {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        .template-title p {
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+        
+        .template-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        
+        .template-code {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .code-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .code-header span {
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .copy-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            background: var(--accent-glow);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+        pre {
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            background: var(--bg-primary);
+            margin: 0;
+        }
+        .code-comment { color: #6b7280; }
+        .code-keyword { color: #f472b6; }
+        .code-string { color: #34d399; }
+        .code-function { color: #60a5fa; }
+        .code-number { color: #fbbf24; }
+        .code-highlight { 
+            background: rgba(245, 158, 11, 0.2); 
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .template-notes {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .template-notes h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .note-item {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .note-item:last-child { margin-bottom: 0; }
+        .note-label {
+            font-size: 12px;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .note-content {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .note-content code {
+            background: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--success);
+        }
+        
+        /* Quick Tips */
+        .tips-section {
+            padding: 48px 0;
+        }
+        .tips-section h2 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .tip-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .tip-card h4 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tip-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        @media (max-width: 1024px) {
+            .template-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .tips-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo"><span>AI</span>训练师备考宝典</a>
+            <div class="nav-links">
+                <a href="cheatsheet.html" class="active">代码速记</a>
+                <a href="functions.html">必背函数</a>
+                <a href="subjective.html">主观题</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>代码速记卡 📝</h1>
+            <p>4 个核心代码模板，覆盖全部编程题型。考试时 import 已提供，你只需记住核心代码逻辑</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Template 1: Data Analysis -->
+        <section class="template-section">
+            <div class="template-header">
+                <div class="template-number">1</div>
+                <div class="template-title">
+                    <h2>数据分析统计 (1.1.X)</h2>
+                    <p>条件判断、分箱、分组统计</p>
+                </div>
+            </div>
+            <div class="template-grid">
+                <div class="template-code">
+                    <div class="code-header">
+                        <span>核心代码模板</span>
+                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    </div>
+                    <pre><code id="code1"><span class="code-comment"># 1. 读取数据</span>
+data = pd.<span class="code-function">read_csv</span>(<span class="code-string">'xxx.csv'</span>)
+
+<span class="code-comment"># 2. 条件分类（根据条件生成新列）</span>
+data[<span class="code-string">'新列'</span>] = np.<span class="code-function">where</span>(
+    data[<span class="code-string">'列名'</span>] > <span class="code-number">阈值</span>, 
+    <span class="code-string">'满足条件'</span>, 
+    <span class="code-string">'不满足'</span>
+)
+
+<span class="code-comment"># 3. 分箱操作（连续值切分区间）</span>
+bins = [<span class="code-number">0</span>, <span class="code-number">值1</span>, <span class="code-number">值2</span>, np.inf]
+labels = [<span class="code-string">'标签A'</span>, <span class="code-string">'标签B'</span>, <span class="code-string">'标签C'</span>]
+data[<span class="code-string">'分组'</span>] = pd.<span class="code-function">cut</span>(
+    data[<span class="code-string">'列名'</span>], 
+    bins=bins, 
+    labels=labels, 
+    right=<span class="code-keyword">False</span>
+)
+
+<span class="code-comment"># 4. 分组统计</span>
+结果 = data.<span class="code-function">groupby</span>(<span class="code-string">'分组'</span>)[<span class="code-string">'列'</span>].<span class="code-function">apply</span>(
+    <span class="code-keyword">lambda</span> x: (x == <span class="code-string">'值'</span>).mean()
+)</code></pre>
+                </div>
+                <div class="template-notes">
+                    <h3>💡 考点提示</h3>
+                    <div class="note-item">
+                        <div class="note-label">np.where 用法</div>
+                        <div class="note-content">
+                            三元判断：<code>np.where(条件, 真值, 假值)</code><br>
+                            类似 Excel 的 IF 函数
+                        </div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-label">pd.cut 参数</div>
+                        <div class="note-content">
+                            <code>right=False</code> 表示左闭右开区间 [a, b)<br>
+                            bins 数量要比 labels 多 1
+                        </div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-label">lambda 表达式</div>
+                        <div class="note-content">
+                            <code>(x == '值').mean()</code> 计算占比<br>
+                            布尔值求均值 = 计算 True 的比例
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Template 2: Data Cleaning -->
+        <section class="template-section">
+            <div class="template-header">
+                <div class="template-number">2</div>
+                <div class="template-title">
+                    <h2>数据清洗预处理 (2.1.X)</h2>
+                    <p>缺失值处理、标准化、数据划分</p>
+                </div>
+            </div>
+            <div class="template-grid">
+                <div class="template-code">
+                    <div class="code-header">
+                        <span>核心代码模板</span>
+                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    </div>
+                    <pre><code id="code2"><span class="code-comment"># 1. 读取数据</span>
+data = pd.<span class="code-function">read_csv</span>(<span class="code-string">'xxx.csv'</span>)
+<span class="code-comment"># 或 Excel 文件</span>
+data = pd.<span class="code-function">read_excel</span>(<span class="code-string">'xxx.xlsx'</span>)
+
+<span class="code-comment"># 2. 删除缺失值</span>
+data = data.<span class="code-function">dropna</span>()
+
+<span class="code-comment"># 3. 数据标准化</span>
+scaler = <span class="code-function">StandardScaler</span>()
+data[[<span class="code-string">'列1'</span>, <span class="code-string">'列2'</span>]] = scaler.<span class="code-function">fit_transform</span>(
+    data[[<span class="code-string">'列1'</span>, <span class="code-string">'列2'</span>]]
+)
+
+<span class="code-comment"># 4. 划分训练集和测试集</span>
+X_train, X_test, y_train, y_test = <span class="code-function">train_test_split</span>(
+    X, y, 
+    test_size=<span class="code-number">0.2</span>, 
+    random_state=<span class="code-number">42</span>
+)
+
+<span class="code-comment"># 5. 保存清洗后的数据</span>
+data.<span class="code-function">to_csv</span>(<span class="code-string">'cleaned.csv'</span>, index=<span class="code-keyword">False</span>)</code></pre>
+                </div>
+                <div class="template-notes">
+                    <h3>💡 考点提示</h3>
+                    <div class="note-item">
+                        <div class="note-label">缺失值处理</div>
+                        <div class="note-content">
+                            <code>dropna()</code> 删除含缺失值的行<br>
+                            <code>fillna(值)</code> 用指定值填充
+                        </div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-label">train_test_split 参数</div>
+                        <div class="note-content">
+                            <code>test_size=0.2</code> 测试集占 20%<br>
+                            <code>random_state=42</code> 固定随机种子
+                        </div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-label">保存数据</div>
+                        <div class="note-content">
+                            <code>index=False</code> 不保存索引列<br>
+                            这个参数几乎必填！
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Template 3: ML -->
+        <section class="template-section">
+            <div class="template-header">
+                <div class="template-number">3</div>
+                <div class="template-title">
+                    <h2>机器学习建模 (2.2.X)</h2>
+                    <p>模型创建、训练、保存、预测</p>
+                </div>
+            </div>
+            <div class="template-grid">
+                <div class="template-code">
+                    <div class="code-header">
+                        <span>核心代码模板</span>
+                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    </div>
+                    <pre><code id="code3"><span class="code-comment"># 1. 创建模型</span>
+<span class="code-comment"># 分类任务用 LogisticRegression</span>
+model = <span class="code-function">LogisticRegression</span>(max_iter=<span class="code-number">1000</span>)
+<span class="code-comment"># 回归任务用 RandomForestRegressor</span>
+model = <span class="code-function">RandomForestRegressor</span>(
+    n_estimators=<span class="code-number">100</span>, 
+    random_state=<span class="code-number">42</span>
+)
+
+<span class="code-comment"># 2. 训练模型</span>
+model.<span class="code-function">fit</span>(X_train, y_train)
+
+<span class="code-comment"># 3. 保存模型</span>
+pickle.<span class="code-function">dump</span>(model, <span class="code-function">open</span>(<span class="code-string">'model.pkl'</span>, <span class="code-string">'wb'</span>))
+<span class="code-comment"># 或使用 with 语句</span>
+<span class="code-keyword">with</span> <span class="code-function">open</span>(<span class="code-string">'model.pkl'</span>, <span class="code-string">'wb'</span>) <span class="code-keyword">as</span> f:
+    pickle.<span class="code-function">dump</span>(model, f)
+
+<span class="code-comment"># 4. 预测</span>
+y_pred = model.<span class="code-function">predict</span>(X_test)
+
+<span class="code-comment"># 5. 评估（分类任务）</span>
+report = <span class="code-function">classification_report</span>(y_test, y_pred)
+
+<span class="code-comment"># 5. 评估（回归任务）</span>
+mse = <span class="code-function">mean_squared_error</span>(y_test, y_pred)
+r2 = <span class="code-function">r2_score</span>(y_test, y_pred)</code></pre>
+                </div>
+                <div class="template-notes">
+                    <h3>💡 考点提示</h3>
+                    <div class="note-item">
+                        <div class="note-label">分类 vs 回归</div>
+                        <div class="note-content">
+                            分类：预测类别（如是/否）→ 用 LogisticRegression<br>
+                            回归：预测数值（如价格）→ 用 RandomForestRegressor
+                        </div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-label">pickle.dump 写法</div>
+                        <div class="note-content">
+                            两种写法都正确，考试看题目要求<br>
+                            <code>'wb'</code> = write binary 二进制写入
+                        </div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-label">模型评估</div>
+                        <div class="note-content">
+                            分类用 <code>classification_report</code><br>
+                            回归用 <code>mean_squared_error</code>、<code>r2_score</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Template 4: ONNX -->
+        <section class="template-section">
+            <div class="template-header">
+                <div class="template-number">4</div>
+                <div class="template-title">
+                    <h2>ONNX 模型推理 (3.2.X)</h2>
+                    <p>模型加载、图片处理、推理预测</p>
+                </div>
+            </div>
+            <div class="template-grid">
+                <div class="template-code">
+                    <div class="code-header">
+                        <span>核心代码模板</span>
+                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    </div>
+                    <pre><code id="code4"><span class="code-comment"># 1. 加载 ONNX 模型</span>
+session = ort.<span class="code-function">InferenceSession</span>(<span class="code-string">'model.onnx'</span>)
+
+<span class="code-comment"># 2. 打开图片</span>
+image = Image.<span class="code-function">open</span>(<span class="code-string">'img.png'</span>)
+<span class="code-comment"># 转为灰度图</span>
+image = image.<span class="code-function">convert</span>(<span class="code-string">'L'</span>)
+<span class="code-comment"># 或转为 RGB</span>
+image = image.<span class="code-function">convert</span>(<span class="code-string">'RGB'</span>)
+
+<span class="code-comment"># 3. 调整大小</span>
+image = image.<span class="code-function">resize</span>((<span class="code-number">28</span>, <span class="code-number">28</span>))
+
+<span class="code-comment"># 4. 转为数组并调整类型</span>
+image_array = np.<span class="code-function">array</span>(image, dtype=np.float32)
+
+<span class="code-comment"># 5. 添加维度 (batch, channel)</span>
+image_array = np.<span class="code-function">expand_dims</span>(image_array, axis=<span class="code-number">0</span>)
+image_array = np.<span class="code-function">expand_dims</span>(image_array, axis=<span class="code-number">0</span>)
+
+<span class="code-comment"># 6. 获取输入名称</span>
+input_name = session.<span class="code-function">get_inputs</span>()[<span class="code-number">0</span>].name
+
+<span class="code-comment"># 7. 执行推理</span>
+output = session.<span class="code-function">run</span>(<span class="code-keyword">None</span>, {input_name: image_array})
+
+<span class="code-comment"># 8. 获取预测结果</span>
+predicted = np.<span class="code-function">argmax</span>(output[<span class="code-number">0</span>])</code></pre>
+                </div>
+                <div class="template-notes">
+                    <h3>💡 考点提示</h3>
+                    <div class="note-item">
+                        <div class="note-label">图片模式</div>
+                        <div class="note-content">
+                            <code>'L'</code> = 灰度图（单通道）<br>
+                            <code>'RGB'</code> = 彩色图（三通道）<br>
+                            看题目要求选择
+                        </div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-label">np.expand_dims</div>
+                        <div class="note-content">
+                            添加维度：(H,W) → (1,H,W) → (1,1,H,W)<br>
+                            <code>axis=0</code> 在最前面加一维
+                        </div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-label">np.argmax</div>
+                        <div class="note-content">
+                            返回最大值的索引位置<br>
+                            用于获取预测的类别编号
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Tips -->
+        <section class="tips-section">
+            <h2>🚀 考场急救要点</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>📖 读数据</h4>
+                    <p>CSV 用 <code>pd.read_csv()</code><br>Excel 用 <code>pd.read_excel()</code></p>
+                </div>
+                <div class="tip-card">
+                    <h4>💾 存数据</h4>
+                    <p><code>.to_csv('文件名', index=False)</code><br>记得加 <code>index=False</code></p>
+                </div>
+                <div class="tip-card">
+                    <h4>🔢 42 是什么</h4>
+                    <p><code>random_state=42</code> 是固定随机种子<br>保证结果可复现</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="padding: 60px 0; border-top: 1px solid var(--border-subtle); text-align: center;">
+        <div class="container">
+            <p style="color: var(--text-tertiary); font-size: 14px;">Made with ❤️ for AI训练师考生</p>
+        </div>
+    </footer>
+
+    <script>
+        function copyCode(btn) {
+            const codeBlock = btn.closest('.template-code').querySelector('code');
+            const text = codeBlock.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = '已复制!';
+                setTimeout(() => btn.textContent = '复制', 2000);
+            });
+        }
+    </script>
+</body>
+</html>

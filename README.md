@@ -169,6 +169,15 @@ https://docs.qq.com/form/page/DZGpoQnZxYk54cVRQ
 
 **第三阶段：实战练习（2-3 周）**
 
+
+> <span style="color:red; font-weight:bold;">重要提示，实操环境配置</span>
+> [点击查看如何建立实操环境准备](./AI-Trainer-Certification/step3-实操部分/实操环境准备.pdf)
+>
+> 这一阶段的重点是通过实践项目巩固所学知识，提升实际操作能力。建议完成以下实践任务：
+> 
+
+
+
 这一阶段的重点是通过实践项目巩固所学知识，提升实际操作能力。建议完成以下实践任务：
 
 1. **数据处理实战**：

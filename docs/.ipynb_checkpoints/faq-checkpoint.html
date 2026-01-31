@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常见问题 FAQ - AI训练师备考宝典</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-tertiary: #27272a;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-default: rgba(255, 255, 255, 0.1);
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-tertiary: #71717a;
+            --accent-primary: #f59e0b;
+            --accent-secondary: #fbbf24;
+            --accent-glow: rgba(245, 158, 11, 0.15);
+            --success: #22c55e;
+            --info: #3b82f6;
+            --warning: #eab308;
+            --error: #ef4444;
+            --purple: #a855f7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto; padding: 16px 24px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo { font-size: 15px; font-weight: 600; color: var(--text-primary); text-decoration: none; }
+        .nav-logo span { color: var(--accent-primary); }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+        
+        .page-header {
+            padding: 120px 0 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .page-header h1 { font-size: 40px; font-weight: 700; margin-bottom: 16px; }
+        .page-header p { color: var(--text-secondary); font-size: 18px; max-width: 600px; margin: 0 auto; }
+        
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            flex-wrap: wrap;
+        }
+        .category-tab {
+            padding: 12px 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .category-tab:hover { border-color: var(--border-default); }
+        .category-tab.active {
+            background: var(--accent-glow);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+        .category-tab.beginner.active { background: rgba(34, 197, 94, 0.15); border-color: var(--success); color: var(--success); }
+        .category-tab.advanced.active { background: rgba(59, 130, 246, 0.15); border-color: var(--info); color: var(--info); }
+        .category-tab.errors.active { background: rgba(239, 68, 68, 0.15); border-color: var(--error); color: var(--error); }
+        .category-tab.tips.active { background: rgba(168, 85, 247, 0.15); border-color: var(--purple); color: var(--purple); }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 48px 0;
+            display: none;
+        }
+        .faq-section.active { display: block; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .section-icon.beginner { background: rgba(34, 197, 94, 0.15); }
+        .section-icon.advanced { background: rgba(59, 130, 246, 0.15); }
+        .section-icon.errors { background: rgba(239, 68, 68, 0.15); }
+        .section-icon.tips { background: rgba(168, 85, 247, 0.15); }
+        .faq-section h2 { font-size: 28px; }
+        .faq-section > p { color: var(--text-secondary); margin-bottom: 32px; margin-left: 64px; }
+        
+        /* FAQ Items */
+        .faq-list { display: flex; flex-direction: column; gap: 16px; }
+        .faq-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        .faq-item:hover { border-color: var(--border-default); }
+        .faq-question {
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .faq-question h3 {
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .q-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .q-badge.beginner { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+        .q-badge.advanced { background: rgba(59, 130, 246, 0.15); color: var(--info); }
+        .q-badge.errors { background: rgba(239, 68, 68, 0.15); color: var(--error); }
+        .q-badge.tips { background: rgba(168, 85, 247, 0.15); color: var(--purple); }
+        .faq-toggle {
+            width: 24px; height: 24px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-tertiary);
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+        .faq-item.open .faq-toggle { transform: rotate(180deg); }
+        .faq-answer {
+            padding: 0 24px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+        }
+        .faq-item.open .faq-answer {
+            padding: 0 24px 24px;
+            max-height: 2000px;
+        }
+        .faq-answer-content {
+            padding-top: 16px;
+            border-top: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        .faq-answer-content code {
+            background: var(--bg-primary);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--success);
+        }
+        .faq-answer-content pre {
+            background: var(--bg-primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .faq-answer-content strong { color: var(--text-primary); }
+        .faq-answer-content ul, .faq-answer-content ol {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+        .faq-answer-content li { margin-bottom: 8px; }
+        .faq-answer-content .tip-box {
+            background: var(--accent-glow);
+            border: 1px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        .faq-answer-content .tip-box strong {
+            color: var(--accent-primary);
+        }
+        .faq-answer-content .warning-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        .faq-answer-content .warning-box strong {
+            color: var(--error);
+        }
+        
+        /* Quick Reference Grid */
+        .quick-ref-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+        .quick-ref-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .quick-ref-card h4 {
+            font-size: 14px;
+            color: var(--accent-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .quick-ref-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .quick-ref-card code {
+            background: var(--bg-primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--success);
+        }
+        
+        /* Exam Tips Section */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+        .tip-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 24px;
+            border-left: 3px solid var(--purple);
+        }
+        .tip-card h4 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tip-card ul {
+            color: var(--text-secondary);
+            font-size: 14px;
+            padding-left: 20px;
+        }
+        .tip-card li { margin-bottom: 8px; }
+        
+        /* Search Box */
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto 32px;
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 14px 20px 14px 48px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 15px;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .search-box input:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+        .search-box input::placeholder { color: var(--text-tertiary); }
+        .search-box .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-tertiary);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .category-tabs { padding: 24px 16px; }
+            .faq-section > p { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo"><span>AI</span>训练师备考宝典</a>
+            <div class="nav-links">
+                <a href="cheatsheet.html">代码速记</a>
+                <a href="functions.html">必背函数</a>
+                <a href="subjective.html">主观题</a>
+                <a href="faq.html" class="active">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>常见问题 FAQ 💡</h1>
+            <p>分类整理的备考疑问解答，帮助你快速找到答案</p>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="搜索问题..." onkeyup="searchFAQ()">
+        </div>
+    </section>
+
+    <section class="category-tabs">
+        <button class="category-tab beginner active" onclick="showCategory('beginner')">
+            🌱 入门篇
+        </button>
+        <button class="category-tab advanced" onclick="showCategory('advanced')">
+            🚀 进阶篇
+        </button>
+        <button class="category-tab errors" onclick="showCategory('errors')">
+            ⚠️ 常见报错
+        </button>
+        <button class="category-tab tips" onclick="showCategory('tips')">
+            💡 考试技巧
+        </button>
+    </section>
+
+    <main class="container">
+        <!-- Beginner Section -->
+        <section id="beginner" class="faq-section active">
+            <div class="section-header">
+                <div class="section-icon beginner">🌱</div>
+                <h2>入门篇</h2>
+            </div>
+            <p>适合 Python 零基础、文科背景的考生，从最基础的概念开始</p>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge beginner">Q1</span>Python 完全没学过，能过考试吗？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <strong>完全可以！</strong> 考试编程题侧重于模板应用，而非从零编写代码。
+                            <ul>
+                                <li>考试时 <code>import</code> 语句已提前写好，你不需要记</li>
+                                <li>代码填空主要是套用固定模式</li>
+                                <li>只需要熟练背诵 4 个核心模板</li>
+                            </ul>
+                            <div class="tip-box">
+                                <strong>💡 关键提示：</strong>把模板背熟，然后多默写几遍就能过。考试本质是"填空题"，不是"编程题"。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge beginner">Q2</span>Jupyter Notebook 是什么？怎么用？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Jupyter Notebook 是一个<strong>交互式编程环境</strong>，考试时会提供。
+                            <ul>
+                                <li>界面分为一个个"单元格"（Cell）</li>
+                                <li>在代码单元格中填写代码，按 <code>Shift + Enter</code> 运行</li>
+                                <li>运行结果会显示在单元格下方</li>
+                                <li>可以逐步执行，方便调试</li>
+                            </ul>
+                            <div class="tip-box">
+                                <strong>💡 操作要点：</strong>你只需要在空白处（通常是 <code>__________</code>）填写代码，然后按 Shift+Enter 运行。如果没报错就说明填对了！
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge beginner">Q3</span>import 是什么意思？需要背吗？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <code>import</code> 就是"导入工具库"，类似手机下载 APP。
+                            <pre>import pandas as pd    # 导入数据处理工具，简称 pd
+import numpy as np     # 导入数学计算工具，简称 np</pre>
+                            <strong>好消息：考试时这些语句已经写好了！</strong>你不需要自己写，也不需要背。只需要知道：
+                            <ul>
+                                <li><code>pd</code> 是 pandas 的简称，用于读写数据</li>
+                                <li><code>np</code> 是 numpy 的简称，用于数学计算</li>
+                                <li><code>ort</code> 是 onnxruntime 的简称，用于加载 AI 模型</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge beginner">Q4</span>pd.read_csv() 是什么意思？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            这是读取 CSV 文件的函数，类似 Excel 的"打开文件"：
+                            <pre>data = pd.read_csv('patient_data.csv')</pre>
+                            拆解一下：
+                            <ul>
+                                <li><code>pd</code> = pandas 库</li>
+                                <li><code>read_csv</code> = 读取 CSV 文件的函数</li>
+                                <li><code>'patient_data.csv'</code> = 文件名（引号内填题目给的文件名）</li>
+                                <li><code>data</code> = 把读取的数据存到这个变量里</li>
+                            </ul>
+                            <div class="tip-box">
+                                <strong>💡 记忆口诀：</strong>pd（熊猫）read（读取）csv（文件），熊猫在读文件！
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge beginner">Q5</span>什么是 DataFrame？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            DataFrame 就是<strong>表格数据</strong>，类似 Excel 表格：
+                            <ul>
+                                <li>有行和列</li>
+                                <li><code>data['列名']</code> 可以获取某一列</li>
+                                <li><code>data.head()</code> 显示前 5 行</li>
+                                <li><code>data.columns</code> 查看所有列名</li>
+                            </ul>
+                            当你用 <code>pd.read_csv()</code> 读取文件后，得到的就是一个 DataFrame。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge beginner">Q6</span>变量是什么？X、y、data 都代表什么？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            变量就是<strong>给数据起的名字</strong>，用来存储和引用数据。
+                            <pre>data = pd.read_csv('file.csv')  # data 存储原始数据
+X = data[['列1', '列2']]        # X 存储特征（输入）
+y = data['目标列']               # y 存储目标（要预测的）</pre>
+                            <strong>常见变量名含义：</strong>
+                            <ul>
+                                <li><code>data</code> / <code>df</code> - 原始数据</li>
+                                <li><code>X</code> - 特征数据（用来预测的输入）</li>
+                                <li><code>y</code> - 目标数据（要预测的结果）</li>
+                                <li><code>X_train</code>, <code>X_test</code> - 训练集和测试集的特征</li>
+                                <li><code>y_train</code>, <code>y_test</code> - 训练集和测试集的目标</li>
+                                <li><code>y_pred</code> - 模型的预测结果</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge beginner">Q7</span>引号、括号、逗号这些符号怎么记？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <strong>符号规则：</strong>
+                            <ul>
+                                <li><code>'单引号'</code> 或 <code>"双引号"</code> - 包裹文字内容（字符串）</li>
+                                <li><code>()</code> 小括号 - 函数调用</li>
+                                <li><code>[]</code> 中括号 - 取数据、列表</li>
+                                <li><code>,</code> 逗号 - 分隔参数</li>
+                                <li><code>=</code> 等号 - 赋值（把右边的值给左边）</li>
+                            </ul>
+                            <pre># 例子
+data['列名']                    # 中括号取列
+pd.read_csv('文件.csv')         # 小括号调用函数，单引号包文件名
+train_test_split(X, y, test_size=0.2)  # 逗号分隔参数</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge beginner">Q8</span>42 这个数字经常出现，有什么特殊含义吗？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <code>random_state=42</code> 是一个<strong>随机种子</strong>，用于保证结果可复现。
+                            <pre>train_test_split(X, y, test_size=0.2, random_state=42)</pre>
+                            <ul>
+                                <li>42 本身没有特殊含义，可以是任何数字</li>
+                                <li>设置后每次运行结果相同，方便检查答案</li>
+                                <li>考试题目会告诉你用什么数字，照抄即可</li>
+                            </ul>
+                            <div class="tip-box">
+                                <strong>💡 冷知识：</strong>42 来自《银河系漫游指南》，是"生命、宇宙以及一切的终极答案"，程序员们很喜欢用这个数字 😄
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Section -->
+        <section id="advanced" class="faq-section">
+            <div class="section-header">
+                <div class="section-icon advanced">🚀</div>
+                <h2>进阶篇</h2>
+            </div>
+            <p>适合有一定基础、想深入理解代码逻辑的考生</p>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge advanced">Q1</span>lambda x: (x == '高风险').mean() 什么意思？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            这是一个 <code>lambda</code> 匿名函数，常用于 <code>apply</code> 方法：
+                            <pre>data.groupby('分组')['风险'].apply(lambda x: (x == '高风险').mean())</pre>
+                            <strong>拆解：</strong>
+                            <ul>
+                                <li><code>lambda x:</code> - 定义一个临时函数，参数是 x</li>
+                                <li><code>x</code> - 代表分组后的每一组数据（一个 Series）</li>
+                                <li><code>(x == '高风险')</code> - 生成布尔值 Series（True/False）</li>
+                                <li><code>.mean()</code> - 计算 True 的比例（True=1, False=0）</li>
+                            </ul>
+                            <strong>效果：</strong>计算每组中"高风险"的占比。
+                            <div class="tip-box">
+                                <strong>💡 记忆方法：</strong>把 lambda 当作一个"临时小助手"，x 是它收到的数据，冒号后面是它要做的事情。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge advanced">Q2</span>pd.cut 和 np.where 有什么区别？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            两者都用于分类，但适用场景不同：
+                            <pre># np.where - 二分类（只有两个类别）
+data['风险'] = np.where(data['天数'] > 7, '高风险', '低风险')
+
+# pd.cut - 多分类（多个区间）
+bins = [0, 18.5, 24, 28, np.inf]
+labels = ['偏瘦', '正常', '超重', '肥胖']
+data['BMI分组'] = pd.cut(data['BMI'], bins=bins, labels=labels)</pre>
+                            <strong>简单记：</strong>
+                            <ul>
+                                <li>两个类别（是/否）→ 用 <code>np.where</code></li>
+                                <li>多个区间 → 用 <code>pd.cut</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge advanced">Q3</span>axis=0 和 axis=1 怎么区分？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <ul>
+                                <li><code>axis=0</code> = 按<strong>行</strong>操作（上下方向）</li>
+                                <li><code>axis=1</code> = 按<strong>列</strong>操作（左右方向）</li>
+                            </ul>
+                            <pre>data.drop('列名', axis=1)  # 删除一列
+data.dropna(axis=0)        # 删除有缺失值的行
+np.expand_dims(arr, axis=0) # 在最前面添加一维</pre>
+                            <div class="tip-box">
+                                <strong>💡 记忆口诀：</strong>0 像一条竖线（↓行），1 像一条横线（→列）
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge advanced">Q4</span>errors='coerce' 有什么作用？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            在 <code>pd.to_numeric()</code> 中使用：
+                            <pre>data['horsepower'] = pd.to_numeric(data['horsepower'], errors='coerce')</pre>
+                            当遇到无法转换的值（如字符串 "?"）时：
+                            <ul>
+                                <li><code>errors='raise'</code>（默认）- 报错</li>
+                                <li><code>errors='coerce'</code> - 转为 NaN（缺失值）</li>
+                                <li><code>errors='ignore'</code> - 保持原样</li>
+                            </ul>
+                            <strong>用途：</strong>清洗数据时，把无法转换的脏数据标记为 NaN，后续用 <code>dropna()</code> 删除。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge advanced">Q5</span>pickle.dump 保存模型为什么用 'wb'？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <code>'wb'</code> 表示 <strong>write binary</strong>（写入二进制）：
+                            <pre># 保存模型
+pickle.dump(model, open('model.pkl', 'wb'))
+
+# 加载模型（考试一般不考）
+model = pickle.load(open('model.pkl', 'rb'))  # rb = read binary</pre>
+                            <ul>
+                                <li><code>w</code> = write（写入）</li>
+                                <li><code>r</code> = read（读取）</li>
+                                <li><code>b</code> = binary（二进制模式）</li>
+                            </ul>
+                            模型是二进制数据，所以必须用 <code>b</code> 模式。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge advanced">Q6</span>np.expand_dims 为什么要用两次？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            ONNX 模型的输入通常是 4 维数组：<code>(batch, channel, height, width)</code>
+                            <pre># 原始图片数组形状: (28, 28)
+image_array = np.array(image)          # shape: (28, 28) - 高度×宽度
+image_array = np.expand_dims(image_array, axis=0)  # shape: (1, 28, 28) - 添加batch
+image_array = np.expand_dims(image_array, axis=0)  # shape: (1, 1, 28, 28) - 添加channel</pre>
+                            <ul>
+                                <li>第一个 <code>expand_dims</code>：添加 batch 维度（批量大小）</li>
+                                <li>第二个 <code>expand_dims</code>：添加 channel 维度（颜色通道）</li>
+                            </ul>
+                            <div class="warning-box">
+                                <strong>⚠️ 注意：</strong>不同模型要求可能不同，有的是 (batch, height, width, channel)，看题目说明！
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge advanced">Q7</span>分类模型和回归模型怎么选？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            看目标变量（y）的类型：
+                            <ul>
+                                <li><strong>分类</strong>：预测类别（如是/否、高/中/低）→ <code>LogisticRegression</code></li>
+                                <li><strong>回归</strong>：预测数值（如价格、年龄）→ <code>RandomForestRegressor</code></li>
+                            </ul>
+                            <strong>评估指标也不同：</strong>
+                            <pre># 分类任务
+report = classification_report(y_test, y_pred)
+
+# 回归任务
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)</pre>
+                            <div class="tip-box">
+                                <strong>💡 快速判断：</strong>看 y 的值是"类别名称"还是"具体数字"，类别用分类，数字用回归。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge advanced">Q8</span>convert('L') 和 convert('RGB') 怎么选？</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <ul>
+                                <li><code>convert('L')</code> = <strong>灰度图</strong>（黑白，1 个通道）</li>
+                                <li><code>convert('RGB')</code> = <strong>彩色图</strong>（红绿蓝，3 个通道）</li>
+                            </ul>
+                            <pre># MNIST 手写数字识别（黑白图片）
+image = Image.open('digit.png').convert('L')
+
+# ResNet 图像分类（彩色图片）
+image = Image.open('photo.jpg').convert('RGB')</pre>
+                            <strong>判断方法：</strong>看题目给的模型和说明，手写数字一般是灰度，物体识别一般是彩色。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Errors Section -->
+        <section id="errors" class="faq-section">
+            <div class="section-header">
+                <div class="section-icon errors">⚠️</div>
+                <h2>常见报错</h2>
+            </div>
+            <p>考试中可能遇到的错误及解决方法</p>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge errors">E1</span>ModuleNotFoundError: No module named 'xxx'</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <strong>原因：</strong>缺少某个库。
+                            <strong>解决：</strong>考试环境应该已经安装好了，如果没有：
+                            <pre>!pip install xxx  # 在 Jupyter 中安装</pre>
+                            <div class="tip-box">
+                                <strong>💡 提示：</strong>先检查是否拼写错误，比如 <code>sklear</code> 应该是 <code>sklearn</code>。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge errors">E2</span>FileNotFoundError: No such file or directory</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <strong>原因：</strong>文件路径错误或文件不存在。
+                            <strong>检查：</strong>
+                            <ol>
+                                <li>文件名是否拼写正确（注意大小写）</li>
+                                <li>文件扩展名是否正确（.csv vs .xlsx）</li>
+                                <li>文件是否和代码在同一目录</li>
+                            </ol>
+                            <pre># 查看当前目录的文件
+import os
+print(os.listdir('.'))</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge errors">E3</span>KeyError: '列名'</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <strong>原因：</strong>列名不存在或拼写错误。
+                            <strong>解决：</strong>
+                            <pre># 查看所有列名
+print(data.columns)
+
+# 查看前几行数据
+print(data.head())</pre>
+                            <div class="warning-box">
+                                <strong>⚠️ 注意：</strong>列名可能包含空格或特殊字符，要完全一致！
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge errors">E4</span>ValueError: could not convert string to float</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <strong>原因：</strong>数据中包含无法转换为数字的值（如 "?" 或空字符串）。
+                            <strong>解决：</strong>
+                            <pre># 使用 errors='coerce' 将无法转换的值变为 NaN
+data['列'] = pd.to_numeric(data['列'], errors='coerce')
+data = data.dropna()  # 删除 NaN 所在行</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge errors">E5</span>SyntaxError: invalid syntax</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <strong>原因：</strong>代码语法错误。
+                            <strong>常见原因：</strong>
+                            <ul>
+                                <li>括号不匹配 <code>(()</code></li>
+                                <li>引号不匹配 <code>'abc"</code></li>
+                                <li>忘记冒号 <code>if x > 0</code> (应该是 <code>if x > 0:</code>)</li>
+                                <li>中文符号（如中文逗号 <code>，</code>）</li>
+                            </ul>
+                            <div class="tip-box">
+                                <strong>💡 技巧：</strong>看报错指向的行号，错误通常在那一行或上一行。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3><span class="q-badge errors">E6</span>NameError: name 'xxx' is not defined</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <strong>原因：</strong>使用了未定义的变量或函数。
+                            <strong>可能原因：</strong>
+                            <ul>
+                                <li>忘记运行前面的代码单元格</li>
+                                <li>变量名拼写错误</li>
+                                <li>忘记导入库</li>
+                            </ul>
+                            <strong>解决：</strong>从头开始依次运行所有代码单元格。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section id="tips" class="faq-section">
+            <div class="section-header">
+                <div class="section-icon tips">💡</div>
+                <h2>考试技巧</h2>
+            </div>
+            <p>帮助你在考场上发挥更好的实用技巧</p>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>⏱️ 时间分配</h4>
+                    <ul>
+                        <li>先浏览所有题目，确定题型</li>
+                        <li>优先做有把握的题目</li>
+                        <li>代码题：先写 import，再逐步填写</li>
+                        <li>文字题：按模板快速套用</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🎯 代码写不出来怎么办</h4>
+                    <ul>
+                        <li>先把能写的写上（import、读取数据）</li>
+                        <li>按照模板框架写，即使不完整也能拿部分分</li>
+                        <li>用注释说明你想做什么</li>
+                        <li><strong>绝对不要留空白！</strong></li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🔍 忘记函数名怎么办</h4>
+                    <ul>
+                        <li>写你记得的部分</li>
+                        <li>用注释说明意图：<code># 这里应该用分箱函数</code></li>
+                        <li>尝试相近的写法，可能碰对</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🐛 代码报错怎么调试</h4>
+                    <ul>
+                        <li>检查拼写是否正确</li>
+                        <li>检查引号、括号是否匹配</li>
+                        <li>检查缩进是否正确</li>
+                        <li>检查变量名是否一致</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 48px; margin-bottom: 24px;">📋 考场急救速查表</h3>
+            <div class="quick-ref-grid">
+                <div class="quick-ref-card">
+                    <h4>📖 读数据</h4>
+                    <p>CSV 文件</p>
+                    <code>pd.read_csv('文件名.csv')</code>
+                    <p style="margin-top: 8px;">Excel 文件</p>
+                    <code>pd.read_excel('文件名.xlsx')</code>
+                </div>
+                <div class="quick-ref-card">
+                    <h4>💾 存数据</h4>
+                    <p>保存 CSV（记得 index=False）</p>
+                    <code>data.to_csv('文件名.csv', index=False)</code>
+                </div>
+                <div class="quick-ref-card">
+                    <h4>🧹 清洗数据</h4>
+                    <p>删除缺失值</p>
+                    <code>data.dropna()</code>
+                    <p style="margin-top: 8px;">标准化</p>
+                    <code>scaler.fit_transform(data[列])</code>
+                </div>
+                <div class="quick-ref-card">
+                    <h4>✂️ 划分数据</h4>
+                    <p>记住返回顺序：X_train, X_test, y_train, y_test</p>
+                    <code>train_test_split(X, y, test_size=0.2, random_state=42)</code>
+                </div>
+                <div class="quick-ref-card">
+                    <h4>🤖 训练模型</h4>
+                    <p>训练</p>
+                    <code>model.fit(X_train, y_train)</code>
+                    <p style="margin-top: 8px;">预测</p>
+                    <code>model.predict(X_test)</code>
+                </div>
+                <div class="quick-ref-card">
+                    <h4>💿 保存模型</h4>
+                    <p>pickle 保存</p>
+                    <code>pickle.dump(model, open('model.pkl', 'wb'))</code>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="padding: 60px 0; border-top: 1px solid var(--border-subtle); text-align: center;">
+        <div class="container">
+            <p style="color: var(--text-tertiary); font-size: 14px;">Made with ❤️ for AI训练师考生 · 祝你考试顺利！💪</p>
+        </div>
+    </footer>
+
+    <script>
+        function showCategory(category) {
+            // Update tabs
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.closest('.category-tab').classList.add('active');
+            
+            // Update sections
+            document.querySelectorAll('.faq-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(category).classList.add('active');
+        }
+        
+        function toggleFaq(element) {
+            const item = element.closest('.faq-item');
+            item.classList.toggle('open');
+        }
+        
+        function searchFAQ() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const items = document.querySelectorAll('.faq-item');
+            
+            if (input.length < 2) {
+                items.forEach(item => item.style.display = 'block');
+                return;
+            }
+            
+            // Show all sections when searching
+            document.querySelectorAll('.faq-section').forEach(section => {
+                section.classList.add('active');
+            });
+            
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(input)) {
+                    item.style.display = 'block';
+                    item.classList.add('open');
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

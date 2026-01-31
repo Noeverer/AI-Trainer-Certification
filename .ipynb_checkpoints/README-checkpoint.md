@@ -2,6 +2,12 @@
 
 > 专为 Python 零基础考生设计的备考资料，4 个代码模板 + 通用答题框架，帮助你在 5-7 小时内掌握通关要点！
 
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-在线访问-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-blue)
+
+## 🌐 在线访问
+
+**备考网站**: [https://LivingWithAI.github.io/AI-Trainer-Certification/](https://LivingWithAI.github.io/AI-Trainer-Certification/)
 
 ## ✨ 网站功能
 
@@ -33,6 +39,34 @@ AI-Trainer-Certification/
     │   └── 编程题_未填写答案/   # 📝 练习用
     └── 考前总复习-思维导图/    # 📊 复习资料
 ```
+
+## 🚀 快速开始
+
+### 在线学习（推荐）
+
+1. 访问 [备考网站](https://your-username.github.io/AI-Trainer-Certification/)
+2. 按照首页的复习计划进行学习
+3. 重点关注「代码速记卡」和「必背函数」
+
+### 本地部署
+
+```bash
+# 克隆仓库
+git clone https://github.com/LivingWithAI/AI-Trainer-Certification.git
+
+# 进入目录
+cd AI-Trainer-Certification
+
+# 用浏览器直接打开
+open docs/index.html
+```
+
+### 启用 GitHub Pages
+
+1. 进入仓库的 Settings → Pages
+2. Source 选择 `Deploy from a branch`
+3. Branch 选择 `main`，目录选择 `/docs`
+4. 保存后等待几分钟即可访问
 
 ## 🎓 考试题型速览
 
@@ -66,6 +100,10 @@ AI-Trainer-Certification/
 - 发现错误？提 Issue
 - 有更好的解答？提 PR
 - 想增加内容？提 Discussion
+
+## 📄 License
+
+MIT License - 免费使用和分享
 
 ---
 
